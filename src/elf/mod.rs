@@ -48,7 +48,7 @@ pub mod section_header;
 pub mod compression_header;
 #[macro_use]
 pub mod sym;
-pub mod dyn;
+pub mod dynamic;
 #[macro_use]
 pub mod reloc;
 pub mod note;
@@ -72,8 +72,8 @@ if_sylvan! {
     pub type SectionHeader = section_header::SectionHeader;
     pub type Symtab<'a> = sym::Symtab<'a>;
     pub type Sym = sym::Sym;
-    pub type Dyn = dyn::Dyn;
-    pub type Dynamic = dyn::Dynamic;
+    pub type Dyn = dynamic::Dyn;
+    pub type Dynamic = dynamic::Dynamic;
     pub type Reloc = reloc::Reloc;
 
     pub type ProgramHeaders = Vec<ProgramHeader>;
@@ -226,7 +226,7 @@ if_sylvan! {
                     // this is an overflow hack that allows us to use virtual memory addresses
                     // as though they're in the file by generating a fake load bias which is then
                     // used to overflow the values in the dynamic array, and in a few other places
-                    // (see Dyn::DynamicInfo), to generate actual file offsets; you may have to
+                    // (see dynamic::DynamicInfo), to generate actual file offsets; you may have to
                     // marinate a bit on why this works. i am unsure whether it works in every
                     // conceivable case. i learned this trick from reading too much dynamic linker
                     // C code (a whole other class of C code) and having to deal with broken older
@@ -303,7 +303,7 @@ if_sylvan! {
                 // parse the dynamic relocations
                 dynrelas = Reloc::parse(bytes, dyn_info.rela, dyn_info.relasz, true, ctx)?;
                 dynrels = Reloc::parse(bytes, dyn_info.rel, dyn_info.relsz, false, ctx)?;
-                let is_rela = dyn_info.pltrel as u64 == dyn::DT_RELA;
+                let is_rela = dyn_info.pltrel as u64 == dynamic::DT_RELA;
                 pltrelocs = Reloc::parse(bytes, dyn_info.jmprel, dyn_info.pltrelsz, is_rela, ctx)?;
             }
 

@@ -338,7 +338,7 @@ pub mod elf32 {
     pub use elf::header::header32 as header;
     pub use elf::program_header::program_header32 as program_header;
     pub use elf::section_header::section_header32 as section_header;
-    pub use elf::dyn::dyn32 as dyn;
+    pub use elf::dynamic::dyn32 as dynamic;
     pub use elf::sym::sym32 as sym;
     pub use elf::reloc::reloc32 as reloc;
     pub use elf::note::Nhdr32 as Note;
@@ -354,7 +354,7 @@ pub mod elf64 {
     pub use elf::header::header64 as header;
     pub use elf::program_header::program_header64 as program_header;
     pub use elf::section_header::section_header64 as section_header;
-    pub use elf::dyn::dyn64 as dyn;
+    pub use elf::dynamic::dyn64 as dynamic;
     pub use elf::sym::sym64 as sym;
     pub use elf::reloc::reloc64 as reloc;
     pub use elf::note::Nhdr64 as Note;

@@ -428,7 +428,7 @@ macro_rules! elf_dyn_std_impl {
             use elf::program_header::{PT_DYNAMIC};
             use strtab::Strtab;
 
-            use elf::dyn::Dyn as ElfDyn;
+            use elf::dynamic::Dyn as ElfDyn;
 
             if_std! {
                 use std::fs::File;
@@ -637,7 +637,7 @@ macro_rules! elf_dyn_std_impl {
 
 
 pub mod dyn32 {
-    pub use elf::dyn::*;
+    pub use elf::dynamic::*;
 
     elf_dyn!(u32);
 
@@ -649,7 +649,7 @@ pub mod dyn32 {
 
 
 pub mod dyn64 {
-    pub use elf::dyn::*;
+    pub use elf::dynamic::*;
 
     elf_dyn!(u64);
 
